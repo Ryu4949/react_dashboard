@@ -21,7 +21,7 @@ function useAuth() {
     }, [])
 
     const fetchUser = async userId => {
-        await api.user.get(userId)
+        await api.users.get(userId)
         .then(res => {
             setUser(res.data);
             localStorage.setItem('id', res.data.id)
