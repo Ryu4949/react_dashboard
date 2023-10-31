@@ -61,7 +61,7 @@ function Users() {
     if (selectedItem) setOpenEditModal(true);
   }, [selectedItem]);
 
-  const fetchCodes = async () => {
+  const fetchUsers = async () => {
     // console.log('fetchCodes');
     let params = {
       parent_code: parentKeyword ? parentKeyword : null,
@@ -72,23 +72,23 @@ function Users() {
       _sort: sort,
       _order: order,
     };
-    return await useApi().api.codes.getAll(params);
+    return await useApi().api.user.getAll(params);
   };
 
-  const fetchCode = async id => {
+  const fetchUser = async id => {
     console.log('fetchCode');
     await useApi()
-      .api.codes.get(id)
-      .then(data => {
-        setSelectedItem(data);
+      .api.user.get(id)
+      .then(res => {
+        setSelectedItem(res.data);
       });
   };
 
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ['codes', parentKeyword, childKeyword, page],
+    queryKey: ['users', parentKeyword, childKeyword, page],
 
     queryFn: () => {
-      return fetchCodes();
+      return fetchUsers();
     },
 
     enabled: false,
@@ -96,8 +96,8 @@ function Users() {
 
   const handleSearch = () => {
     queryClient.prefetchQuery(
-      ['codes', parentKeyword, childKeyword, page],
-      () => fetchCodes()
+      ['users', parentKeyword, childKeyword, page],
+      () => fetchUsers()
     );
   };
 
@@ -111,7 +111,7 @@ function Users() {
   };
 
   const onDetailView = async id => {
-    fetchCode(id);
+    fetchUser(id);
   };
 
   const onDeleteView = async id => {
@@ -200,7 +200,7 @@ function Users() {
 
                   {/* Right: Actions */}
                   <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
-                    {/* Add Code button */}
+                    {/* Add User button */}
                     <button
                       className="btn bg-indigo-500 hover:bg-indigo-600 text-white"
                       onClick={() => setOpenAddModal(true)}
@@ -211,7 +211,7 @@ function Users() {
                       >
                         <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
                       </svg>
-                      <span className="hidden xs:block ml-2">Add Code</span>
+                      <span className="hidden xs:block ml-2">Add User</span>
                     </button>
                   </div>
                 </div>

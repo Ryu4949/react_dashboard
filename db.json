@@ -2,10 +2,9 @@
   "products": [],
   "users": [
     {
-      "email": "kyong@mail.com",
-      "name": "Ryu",
-      "password": "qwer1234!@#",
-      "id": 1
+      "id": 1,
+      "name": "dfadf",
+      "email": "dadf@dfjkd.dfd"
     },
     {
       "id": 2,
@@ -14,10 +13,9 @@
       "password": "1111"
     },
     {
-      "email": "aaa@gmail.com",
-      "name": "Aaa",
-      "password": "1111",
-      "id": 3
+      "id": 3,
+      "name": "wonchangho123",
+      "email": "wonchan@mail.com"
     }
   ],
   "codes": [
@@ -34,13 +32,6 @@
       "parent_code": "OD0100",
       "description": "결제완료",
       "order_no": 1
-    },
-    {
-      "id": 3,
-      "code": "OD0102",
-      "parent_code": "OD0100",
-      "description": "상품준비중",
-      "order_no": 2
     },
     {
       "id": 4,

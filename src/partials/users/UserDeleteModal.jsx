@@ -3,7 +3,7 @@ import { useApi } from '../../api';
 
 function UserDeleteModal(props) {
   const onSubmit = async () => {
-    await useApi().api.codes.delete(props.selectedId);
+    await useApi().api.user.delete(props.selectedId);
     props.onClose();
   };
 

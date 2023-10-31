@@ -111,7 +111,7 @@ function UsersCard({ payload, onChangePage, onDetailView, onDeleteView }) {
     <div className="w-full col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
       <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
         <h2 className="font-semibold text-slate-800 dark:text-slate-100">
-          공통코드 관리
+          사용자 관리
         </h2>
       </header>
       <div className="p-3">
@@ -135,16 +135,13 @@ function UsersCard({ payload, onChangePage, onDetailView, onDeleteView }) {
                   번호
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  상위 코드
+                  이름
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  코드
+                  이메일
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  설명
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  순서
+                  수정
                 </th>
                 <th scope="col" className="px-6 py-3">
                   삭제
@@ -178,7 +175,8 @@ function UsersCard({ payload, onChangePage, onDetailView, onDeleteView }) {
                   >
                     {item.id}
                   </th>
-                  <td className="px-6 py-4">{item.parent_code}</td>
+                  <td className="px-6 py-4">{item.name}</td>
+                  <td className="px-6 py-4">{item.email}</td>
                   <td className="px-6 py-4">
                     <a
                       className="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -187,11 +185,17 @@ function UsersCard({ payload, onChangePage, onDetailView, onDeleteView }) {
                         onDetailView(item.id);
                       }}
                     >
-                      {item.code}
+                      <svg
+                        class="w-6 h-6 text-gray-800 dark:text-white"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 18 20"
+                      >
+                        <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z" />
+                      </svg>
                     </a>
                   </td>
-                  <td className="px-6 py-4">{item.description}</td>
-                  <td className="px-6 py-4">{item.order_no}</td>
                   <td className="px-6 py-4">
                     <a
                       className="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline"
