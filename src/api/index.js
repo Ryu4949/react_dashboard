@@ -1,6 +1,6 @@
-import { users } from "./users";
-import { codes } from "./codes";
+import { user } from './user';
+import { codes } from './codes';
 
 export const useApi = () => {
-  return { api: { users, codes } };
+  return { api: { user, codes } };
 };

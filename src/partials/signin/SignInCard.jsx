@@ -1,14 +1,16 @@
 import React from 'react';
-
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+
 import useAuth from '../../hooks/useAuth';
 
 function SignInCard() {
+  console.log('SignInCard > useAuth');
   const { login } = useAuth();
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -26,7 +28,7 @@ function SignInCard() {
               id="email"
               name="email"
               className="w-full p-2 border border-gray-300 rounded-lg"
-              { ...register('email', {
+              {...register('email', {
                 required: {
                   value: true,
                   message: '이메일은 필수 입력 항목입니다.',
@@ -34,12 +36,12 @@ function SignInCard() {
               })}
             ></input>
             <ErrorMessage
-            errors={ errors }
-            name='email'
-            render={({ message })=>(
-              <p style={{ color: 'red' }}>{message}</p>
-            )}>
-            </ErrorMessage>
+              errors={errors}
+              name="email"
+              render={({ message }) => (
+                <p style={{ color: 'red' }}>{message}</p>
+              )}
+            ></ErrorMessage>
           </div>
           <div className="mb-4">
             <label htmlFor="password" className="block text-gray-600">
@@ -50,26 +52,25 @@ function SignInCard() {
               id="password"
               name="password"
               className="w-full p-2 border border-gray-300 rounded-lg"
-              {
-                ...register('password', {
-                  required: {
-                    value: true,
-                    message: '비밀번호는 필수 입력 항목입니다.',
-                  },
-                  pattern: {
-                    value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,15}$/,
-                    message: "비밀번호는 문자, 숫자, 특수문자(!@#$%^*+=-)를 포함하여 최소 6자 이상, 15자 이하로 입력해야 합니다."
-                  }
-                })
-              }
+              {...register('password', {
+                required: {
+                  value: true,
+                  message: '비밀번호는 필수 입력 항목입니다.',
+                },
+                pattern: {
+                  value: /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,15}$/,
+                  message:
+                    '비밀번호는 문자, 숫자, 특수문자(!@#$%^*+=-)를 포함하여 최소 6자 이상, 15자 이하로 입력해야 합니다.',
+                },
+              })}
             ></input>
             <ErrorMessage
-            errors={ errors }
-            name='password'
-            render={({ message })=>(
-              <p style={{ color: 'red' }}>{message}</p>
-            )}>
-            </ErrorMessage>
+              errors={errors}
+              name="password"
+              render={({ message }) => (
+                <p style={{ color: 'red' }}>{message}</p>
+              )}
+            ></ErrorMessage>
           </div>
           <button
             type="submit"
