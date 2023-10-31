@@ -11,6 +11,10 @@ import { useApi } from '../api';
 import CodeEditModal from '../partials/codes/CodeEditModal';
 import CodeDeleteModal from '../partials/codes/CodeDeleteModal';
 import CodeAddModal from '../partials/codes/CodeAddModal';
+import UsersCard from '../partials/users/UsersCard';
+import UserAddModal from '../partials/users/UserAddModal';
+import UserEditModal from '../partials/users/UserEditModal';
+import UserDeleteModal from '../partials/users/UserDeleteModal';
 
 function Users() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -215,12 +219,12 @@ function Users() {
                 {/* Cards */}
                 <div className="w-full ">
                   {/* Table (공통 코드 관리 테이블) */}
-                  {/* <CodesCard
+                  <UsersCard
                     payload={data}
                     onChangePage={onChangePage}
                     onDetailView={onDetailView}
                     onDeleteView={onDeleteView}
-                  ></CodesCard> */}
+                  ></UsersCard>
                 </div>
               </div>
             </main>
@@ -230,24 +234,24 @@ function Users() {
         </div>
       ) : null}
       {openAddModal ? (
-        <CodeAddModal
+        <UserAddModal
           isOpen={openAddModal}
           onClose={closeAddModal}
-        ></CodeAddModal>
+        ></UserAddModal>
       ) : null}
       {openEditModal ? (
-        <CodeEditModal
+        <UserEditModal
           isOpen={openEditModal}
           selectedItem={selectedItem}
           onClose={closeEditModal}
-        ></CodeEditModal>
+        ></UserEditModal>
       ) : null}
       {openDeleteModal ? (
-        <CodeDeleteModal
+        <UserDeleteModal
           isOpen={openDeleteModal}
           selectedId={selectedId}
           onClose={closeDeleteModal}
-        ></CodeDeleteModal>
+        ></UserDeleteModal>
       ) : null}
     </>
   );
