@@ -50,7 +50,7 @@ function UserAddModal(props) {
                 이메일
               </label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 className="w-full p-2 border border-gray-300 rounded-lg"
@@ -63,7 +63,7 @@ function UserAddModal(props) {
               ></input>
               <ErrorMessage
                 errors={errors}
-                name="code"
+                name="email"
                 render={({ message }) => (
                   <p style={{ color: 'red' }}>{message}</p>
                 )}

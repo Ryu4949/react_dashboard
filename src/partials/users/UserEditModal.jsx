@@ -70,7 +70,7 @@ function UserEditModal(props) {
                 이메일
               </label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 defaultValue={props.selectedItem?.email}
