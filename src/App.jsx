@@ -10,6 +10,7 @@ import Main from './pages/Main';
 import SignIn from './pages/SignIn';
 import Codes from './pages/Codes';
 import Error404 from './pages/Error404';
+import Users from './pages/Users';
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
         <Route exact path="/" element={<Main />} />
         <Route exact path="/signin" element={<SignIn />} />
         <Route exact path="/manage/codes" element={<Codes />} />
+        <Route exact path="/manage/users" element={<Users />} />
         <Route exact path="*" element={<Error404 />} />
       </Routes>
     </>
