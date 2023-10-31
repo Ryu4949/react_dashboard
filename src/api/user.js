@@ -18,26 +18,6 @@ export const user = {
   get: (id) => {
     return axios.get(`http://localhost:3001/users/${id}`);
   },
-  getByEmail: (email) => {
-    return axios
-      .get(`http://localhost:3001/users`, { email: email })
-      .then((res) => res.data);
-  },
-  getByName: (name) => {
-    return axios
-      .get(`http://localhost:3001/users`, { name: name })
-      .then((res) => res.data);
-  },
-  searchByEmail: (email) => {
-    return axios
-      .get(`http://localhost:3001/users`, { email_like: email })
-      .then((res) => res.data);
-  },
-  searchByName: (name) => {
-    return axios
-      .get(`http://localhost:3001/users`, { name_like: name })
-      .then((res) => res.data);
-  },
   post: (params) => {
     return axios
       .post(`http://localhost:3001/users/`, params)

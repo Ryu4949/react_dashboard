@@ -20,11 +20,9 @@ function Users() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // 실시간으로 입력되는 키워드 데이터 (ref를 사용해서 제거 가능)
-  const [inputParentKeyword, setInputParentKeyword] = useState(null);
-  const [inputChildKeyword, setInputChildKeyword] = useState(null);
+  const [inputKeyword, setInputKeyword] = useState(null);
   // 검색 버튼 클릭 시 실제 서버로 전송될 키워드 데이터
-  const [parentKeyword, setParentKeyword] = useState(null);
-  const [childKeyword, setChildKeyword] = useState(null);
+  const [keyword, setKeyword] = useState(null);
 
   // 모달 오픈 설정
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -56,7 +54,9 @@ function Users() {
   const [sort, setSort] = useState('id');
   const [order, setOrder] = useState('desc');
 
-  useEffect(() => handleSearch(), [parentKeyword, childKeyword, page]);
+  const [searchKey, setSearchKey] = useState('name');
+
+  useEffect(() => handleSearch(), [keyword, page]);
   useEffect(() => {
     if (selectedItem) setOpenEditModal(true);
   }, [selectedItem]);
@@ -64,8 +64,8 @@ function Users() {
   const fetchUsers = async () => {
     // console.log('fetchCodes');
     let params = {
-      parent_code: parentKeyword ? parentKeyword : null,
-      code: childKeyword ? childKeyword : null,
+      email_like: searchKey == "email" ? keyword : null,
+      name_like: searchKey == "name" ? keyword : null,
       pageCount: pageCount,
       _page: page,
       _limit: limit,
@@ -85,7 +85,7 @@ function Users() {
   };
 
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ['users', parentKeyword, childKeyword, page],
+    queryKey: ['users', keyword, page],
 
     queryFn: () => {
       return fetchUsers();
@@ -96,7 +96,7 @@ function Users() {
 
   const handleSearch = () => {
     queryClient.prefetchQuery(
-      ['users', parentKeyword, childKeyword, page],
+      ['users', keyword, page],
       () => fetchUsers()
     );
   };
@@ -136,6 +136,10 @@ function Users() {
     refetch();
   };
 
+  const handleRadioButton = (e) => {
+    setSearchKey(e.target.value);
+  }
+
   return (
     <>
       {user ? (
@@ -152,30 +156,25 @@ function Users() {
                 {/* Dashboard actions */}
                 <div className="flex justify-between items-center mb-4">
                   {/* Left: Search Bar */}
-                  <div className="relative flex items-center">
-                    <input
-                      type="text"
-                      id="table-search-parent"
-                      className="block p-2 pl-3 rounded-lg w-50 text-sm text-gray-900 border border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="상위코드"
-                      onChange={event =>
-                        setInputParentKeyword(event.target.value)
-                      }
-                    ></input>
-                    <input
+                  <div>
+                    <input type="radio" value="name" checked={ searchKey === "name"} onChange={handleRadioButton} />
+                    <label>이름</label>
+                    <input type="radio" value="email" checked={ searchKey === "email"} onChange={handleRadioButton} />
+                    <label>이메일</label>
+                  </div>
+                  <input
                       type="text"
                       id="table-search-child"
                       className="block ml-3 p-2 pl-3 rounded-lg w-50 text-sm text-gray-900 border border-gray-300 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="하위코드"
+                      placeholder="검색어"
                       onChange={event =>
-                        setInputChildKeyword(event.target.value)
+                        setInputKeyword(event.target.value)
                       }
                     ></input>
                     <Link
                       onClick={event => {
                         setPage(1);
-                        setParentKeyword(inputParentKeyword);
-                        setChildKeyword(inputChildKeyword);
+                        setKeyword(inputKeyword);
                       }}
                     >
                       <div className="cursor-pointer inset-y-0 right-0 flex items-center px-3 pointer-events-none">
@@ -196,7 +195,6 @@ function Users() {
                         </svg>
                       </div>
                     </Link>
-                  </div>
 
                   {/* Right: Actions */}
                   <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
